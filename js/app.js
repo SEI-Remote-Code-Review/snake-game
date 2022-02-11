@@ -1,10 +1,8 @@
 /*-------------------------------- Constants --------------------------------*/
 
-const snake = [{x:5, y:5}, {x:5, y:6}, {x:5, y:7}];
-
 /*---------------------------- Variables (state) ----------------------------*/
 
-
+let snake, direction;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -24,6 +22,8 @@ init();
 
 
 function init() {
+  snake = [{x:5, y:5}, {x:5, y:6}, {x:5, y:7}];
+  direction = 'up';
   render();
 }
 
@@ -53,3 +53,30 @@ function boardGenerator(columns, rows) {
   return document.querySelectorAll('.board-cell');
 }
 
+console.log(snake)
+
+function move() {
+  let newCoordinate = {};
+  switch (direction) {
+    case 'right':
+      newCoordinate.x = snake[snake.length-1].x;
+      newCoordinate.y = snake[snake.length-1].y+1;
+      break;
+    case 'left':
+      newCoordinate.x = snake[snake.length-1].x;
+      newCoordinate.y = snake[snake.length-1].y-1;
+      break;
+    case 'up':
+      newCoordinate.x = snake[snake.length-1].x-1;
+      newCoordinate.y = snake[snake.length-1].y;
+      break;
+    case 'down':
+      newCoordinate.x = snake[snake.length-1].x+1;
+      newCoordinate.y = snake[snake.length-1].y;
+      break;
+  }
+  snake.push(newCoordinate);
+  snake.shift();
+  console.log(snake);
+  render();
+}
