@@ -16,7 +16,8 @@ body {
   height: 100vh;
   display: grid;
   justify-items: center;
-  align-items: start;
+  align-items: center;
+  grid-template-rows: 60px 1fr 60px;
 }
 
 
@@ -29,6 +30,10 @@ body {
 .board-cell {
   background-color: white;
   border: solid 1px;
+}
+
+.snake-body {
+  background-color: blue;
 }
 
 
