@@ -10,7 +10,7 @@ const board = document.querySelector('#board');
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-
+document.querySelector('#snake-control').addEventListener('click', handleSnakeTurns);
 
 
 
@@ -23,7 +23,7 @@ init();
 
 function init() {
   snake = [{x:5, y:5}, {x:5, y:6}, {x:5, y:7}];
-  direction = 'up';
+  direction = 'right';
   render();
 }
 
@@ -53,7 +53,6 @@ function boardGenerator(columns, rows) {
   return document.querySelectorAll('.board-cell');
 }
 
-console.log(snake)
 
 function move() {
   let newCoordinate = {};
@@ -77,6 +76,12 @@ function move() {
   }
   snake.push(newCoordinate);
   snake.shift();
-  console.log(snake);
   render();
+}
+
+function handleSnakeTurns(evt) {
+  if ((evt.target.id === 'left' && direction !== 'right') || (evt.target.id === 'up' && direction !== 'down') || (evt.target.id === 'down' && direction !== 'up') || (evt.target.id === 'right' && direction !== 'left')) {
+    direction = evt.target.id;
+    move();
+  }
 }
