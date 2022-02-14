@@ -12,12 +12,14 @@ let snake, direction, snakeStart, winner, food, score, newCell;
 const board = document.querySelector('#board');
 const playButton = document.querySelector('#play');
 const message = document.querySelector('#message');
+const restartButton = document.querySelector('#restart');
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 document.querySelector('#snake-control').addEventListener('click', handleTurnButtons);
 document.addEventListener('keydown', handleTurnKeys);
 playButton.addEventListener('click', gameStart);
+restartButton.addEventListener('click', init);
 
 
 
@@ -34,6 +36,9 @@ function init() {
   foodGenerator();
   score = 0;
   winner = 1;
+  restartButton.setAttribute('hidden', true);
+  playButton.textContent = 'PLAY';
+  message.textContent = 'Snake!'
   render();
 }
 
@@ -43,6 +48,9 @@ function render() {
     boardCells.forEach(cell => {
       if (cell.classList.contains('snake-body')) {
       cell.classList.remove('snake-body');
+    }
+      if (cell.classList.contains('food-cell')) {
+      cell.classList.remove('food-cell');
     }
   })
 
@@ -74,6 +82,10 @@ function boardGenerator(columns, rows) {
 
 
 function gameStart(evt) {
+  if (!winner) {
+    return;
+  }
+  restartButton.removeAttribute('hidden');
   if (evt.target.textContent === 'PLAY') {
     snakeStart = setInterval(move, 500);
     playButton.textContent = 'PAUSE';
