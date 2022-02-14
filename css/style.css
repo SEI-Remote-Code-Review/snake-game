@@ -22,14 +22,16 @@ body {
   justify-items: center;
   align-items: center;
   grid-template-columns: 80% 20%;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto;
   grid-template-areas: 
       "title title"
-      "board side"
+      "board score"
+      "board control"
 }
 
 main {
   grid-area: board;
+  justify-self: end;
 }
 
 #message {
@@ -37,7 +39,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-column: 1 / 2;
 }
 
 #board {
@@ -46,12 +47,24 @@ main {
   grid-template-columns: repeat(15, 5vmin); */
 }
 
-#side {
-  grid-area: side;
+#snake-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#snake-control {
+#score {
+  grid-area: score;
+  justify-self: start;
+}
+
+#game-control {
   grid-area: control;
+  justify-self: start;
+}
+
+#game-control > button {
+  display: block;
 }
 
 .board-cell {
