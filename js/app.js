@@ -5,7 +5,7 @@ const rows = 15;
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake, direction, snakeStart, winner, food;
+let snake, direction, snakeStart, winner, food, score;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -32,6 +32,7 @@ function init() {
   snake = [75, 76, 77];
   direction = 'right';
   foodGenerator();
+  score = 0;
   winner = 1;
   render();
 }
@@ -40,17 +41,21 @@ function init() {
 function render() {
   if (winner) {
     boardCells.forEach(cell => {
-    if (cell.classList.contains('snake-body')) {
+      if (cell.classList.contains('snake-body')) {
       cell.classList.remove('snake-body');
     }
   })
 
   snake.forEach(part => {
+    if (boardCells[part].classList.contains('food-cell')) {
+      boardCells[part].classList.remove('food-cell');
+    }
     boardCells[part].classList.add('snake-body');
   })
 
   boardCells[food].classList.add('food-cell');
 } else {
+  clearInterval(snakeStart);
   message.textContent = 'You lost!'
 }
 }
@@ -71,14 +76,16 @@ function gameStart() {
 }
 
 function move() {
+  winner = 1;
   let snakeHead = snake[snake.length-1];
+  let newCell;
   switch (direction) {
   case 'right':   
     if (snakeHead%columns === 14) {
         winner = 0;
         break;
       } else {
-          snake.push(snakeHead + 1);
+          newCell = snakeHead + 1;
           break;
       }
   case 'left':
@@ -86,7 +93,7 @@ function move() {
         winner = 0;
         break;
       } else {
-          snake.push(snakeHead - 1);
+          newCell = snakeHead - 1;
           break;
       }
   case 'up':
@@ -94,7 +101,7 @@ function move() {
         winner = 0;
         break;
       } else {
-          snake.push(snakeHead - 15);
+          newCell = snakeHead - columns;
           break;
       }
   case 'down':
@@ -102,15 +109,27 @@ function move() {
         winner = 0;
         break;
       } else {
-          snake.push(snakeHead + 15);
+          newCell = snakeHead + columns;
           break;
       }
     }
+  
+  if (newCell === food) {
+    snake.push(newCell);
+    foodGenerator();
+    winner = 2;
+  } else {
+    snake.push(newCell);
     snake.shift();
+  }
+
   render();
 }
 
 function handleTurnButtons(evt) {
+  if (!winner) {
+    return;
+  }
   if ((evt.target.id === 'left' && direction !== 'right') || (evt.target.id === 'up' && direction !== 'down') || (evt.target.id === 'down' && direction !== 'up') || (evt.target.id === 'right' && direction !== 'left')) {
     direction = evt.target.id;
     move();
@@ -118,6 +137,9 @@ function handleTurnButtons(evt) {
 }
 
 function handleTurnKeys(evt) {
+  if (!winner) {
+    return;
+  }
   if (evt.code.toLowerCase() === 'arrowleft' && direction !== 'right') {
   direction = 'left';
   move();
