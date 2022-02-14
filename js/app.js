@@ -7,10 +7,12 @@ let snake, direction;
 /*------------------------ Cached Element References ------------------------*/
 
 const board = document.querySelector('#board');
+const startButton = document.querySelector('#start');
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-document.querySelector('#snake-control').addEventListener('click', handleSnakeTurns);
+document.querySelector('#snake-control').addEventListener('click', handleTurnButtons);
+document.addEventListener('keydown', handleTurnKeys);
 
 
 
@@ -79,9 +81,25 @@ function move() {
   render();
 }
 
-function handleSnakeTurns(evt) {
+function handleTurnButtons(evt) {
   if ((evt.target.id === 'left' && direction !== 'right') || (evt.target.id === 'up' && direction !== 'down') || (evt.target.id === 'down' && direction !== 'up') || (evt.target.id === 'right' && direction !== 'left')) {
     direction = evt.target.id;
     move();
+  }
+}
+
+function handleTurnKeys(evt) {
+  if (evt.code.toLowerCase() === 'arrowleft' && direction !== 'right') {
+  direction = 'left';
+  move();
+  } else if (evt.code.toLowerCase() === 'arrowup' && direction !== 'down') {
+  direction = 'up';
+  move();
+  } else if(evt.code.toLowerCase() === 'arrowdown' && direction !== 'up') {
+  direction = 'down';
+  move();
+  } else if (evt.code.toLowerCase() === 'arrowright' && direction !== 'left') {
+  direction = 'right';
+  move();
   }
 }
