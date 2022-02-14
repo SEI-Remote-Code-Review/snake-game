@@ -159,9 +159,10 @@ function addMove(newCell) {
 }
 
 function handleTurnButtons(evt) {
-  if (!winner) {
+  if (playButton.textContent === 'PLAY' || !winner) {
     return;
   }
+
   if ((evt.target.id === 'left' && direction !== 'right') || (evt.target.id === 'up' && direction !== 'down') || (evt.target.id === 'down' && direction !== 'up') || (evt.target.id === 'right' && direction !== 'left')) {
     direction = evt.target.id;
     move();
@@ -169,9 +170,10 @@ function handleTurnButtons(evt) {
 }
 
 function handleTurnKeys(evt) {
-  if (!winner) {
+  if (playButton.textContent === 'PLAY' || !winner) {
     return;
   }
+
   if (evt.code.toLowerCase() === 'arrowleft' && direction !== 'right') {
   direction = 'left';
   move();
@@ -185,6 +187,7 @@ function handleTurnKeys(evt) {
   direction = 'right';
   move();
   }
+  console.log(direction);
 }
 
 function foodGenerator() {
