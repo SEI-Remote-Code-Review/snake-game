@@ -2,7 +2,7 @@
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake, direction;
+let snake, direction, snakeStart;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -13,6 +13,7 @@ const startButton = document.querySelector('#start');
 
 document.querySelector('#snake-control').addEventListener('click', handleTurnButtons);
 document.addEventListener('keydown', handleTurnKeys);
+startButton.addEventListener('click', gameStart);
 
 
 
@@ -102,4 +103,9 @@ function handleTurnKeys(evt) {
   direction = 'right';
   move();
   }
+}
+
+
+function gameStart() {
+  snakeStart = setInterval(move, 1000);
 }
