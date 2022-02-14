@@ -54,6 +54,7 @@ function render() {
   })
 
   boardCells[food].classList.add('food-cell');
+  document.querySelector('#score').textContent = `Score: ${score}`;
 } else {
   clearInterval(snakeStart);
   message.textContent = 'You lost!'
@@ -126,7 +127,6 @@ function addMove(newCell) {
     foodGenerator();
     winner = 2;
     score += 10;
-    console.log(score);
   } else {
     snake.push(newCell);
     snake.shift();
