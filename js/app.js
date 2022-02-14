@@ -55,8 +55,6 @@ function render() {
 }
 }
 
-
-
 function boardGenerator(columns, rows) {
   board.style.gridTemplateRows = `repeat(${rows},5vmin)`;
   board.style.gridTemplateColumns = `repeat(${columns},5vmin)`;
