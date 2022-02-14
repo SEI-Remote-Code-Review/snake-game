@@ -5,19 +5,19 @@ const rows = 15;
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake, direction, snakeStart, winner, food, score;
+let snake, direction, snakeStart, winner, food, score, newCell;
 
 /*------------------------ Cached Element References ------------------------*/
 
 const board = document.querySelector('#board');
-const startButton = document.querySelector('#start');
+const playButton = document.querySelector('#play');
 const message = document.querySelector('#message');
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 document.querySelector('#snake-control').addEventListener('click', handleTurnButtons);
 document.addEventListener('keydown', handleTurnKeys);
-startButton.addEventListener('click', gameStart);
+playButton.addEventListener('click', gameStart);
 
 
 
@@ -72,63 +72,71 @@ function boardGenerator(columns, rows) {
   return document.querySelectorAll('.board-cell');
 }
 
+
 function gameStart() {
   snakeStart = setInterval(move, 500);
+  startButton.textContent = 'RESTART';
 }
 
 function move() {
-  winner = 1;
-  let snakeHead = snake[snake.length-1];
-  let newCell;
   switch (direction) {
-  case 'right':   
-    if (snakeHead%columns === 14) {
-        winner = 0;
+    case 'right':   
+        newCell = snake[snake.length-1] + 1;
         break;
-      } else {
-          newCell = snakeHead + 1;
-          break;
-      }
-  case 'left':
-    if (snakeHead%columns === 0) {
-        winner = 0;
+    case 'left':
+        newCell = snake[snake.length-1] - 1;
         break;
-      } else {
-          newCell = snakeHead - 1;
-          break;
-      }
-  case 'up':
-    if (snakeHead < columns) {
-        winner = 0;
+    case 'up':
+        newCell = snake[snake.length-1] - columns;
         break;
-      } else {
-          newCell = snakeHead - columns;
-          break;
-      }
-  case 'down':
-    if (snakeHead >= columns*(rows-1)) {
-        winner = 0;
+    case 'down':
+        newCell = snake[snake.length-1] + columns;
         break;
-      } else {
-          newCell = snakeHead + columns;
-          break;
-      }
-    }
-  
-  if(winner) {
-    addMove(newCell);
+  }
+  if (checkMove(newCell)) {
+  addMove(newCell);
   }
   render();
 }
 
+function checkMove(newCell) {
+  switch (direction) {
+    case 'right':   
+      if (snake[snake.length-1]%columns === 14) {
+          winner = 0;
+          break;
+        }
+    case 'left':
+      if (snake[snake.length-1]%columns === 0) {
+          winner = 0;
+          break;
+        }
+    case 'up':
+      if (snake[snake.length-1] < columns) {
+          winner = 0;
+          break;
+        }
+    case 'down':
+      if (snake[snake.length-1] >= columns*(rows-1)) {
+          winner = 0;
+          break;
+        }
+    }
+    if (snake.includes(newCell)) {
+      winner = 0;
+    } else if (newCell === food) {
+      winner = 2
+    }
+    return winner;
+}
+
 function addMove(newCell) {
-  if (newCell === food) {
-    snake.push(newCell);
+  snake.push(newCell);
+  if (winner === 2) {
     foodGenerator();
-    winner = 2;
     score += 10;
+    winner = 1;
   } else {
-    snake.push(newCell);
     snake.shift();
   }
 }
