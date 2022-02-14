@@ -114,16 +114,23 @@ function move() {
       }
     }
   
+  if(winner) {
+    addMove(newCell);
+  }
+  render();
+}
+
+function addMove(newCell) {
   if (newCell === food) {
     snake.push(newCell);
     foodGenerator();
     winner = 2;
+    score += 10;
+    console.log(score);
   } else {
     snake.push(newCell);
     snake.shift();
   }
-
-  render();
 }
 
 function handleTurnButtons(evt) {
@@ -154,7 +161,6 @@ function handleTurnKeys(evt) {
   move();
   }
 }
-
 
 function foodGenerator() {
   do {
