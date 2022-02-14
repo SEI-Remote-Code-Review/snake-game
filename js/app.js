@@ -3,6 +3,7 @@
 /*---------------------------- Variables (state) ----------------------------*/
 
 let snake, direction, snakeStart, winner;
+const food = {};
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -26,8 +27,10 @@ init();
 
 
 function init() {
-  snake = [{x:5, y:5}, {x:5, y:6}, {x:5, y:7}];
+  snake = [{x:5, y:2}, {x:5, y:3}, {x:5, y:4}];
   direction = 'right';
+  foodGenerator();
+  console.log(food);
   winner = 1;
   render();
 }
@@ -36,14 +39,16 @@ function init() {
 function render() {
   if (winner) {
     boardCells.forEach(cell => {
-    while (cell.classList.contains('snake-body')) {
-    cell.classList.remove('snake-body');
+    if (cell.classList.contains('snake-body')) {
+      cell.classList.remove('snake-body');
     }
   })
 
   snake.forEach(part => {
     boardCells[part.x * 15 + part.y].classList.add('snake-body');
   })
+
+  boardCells[food.x * 15 + food.y].classList.add('food-cell');
 } else {
   message.textContent = 'You lost!'
 }
@@ -134,3 +139,12 @@ function handleTurnKeys(evt) {
   }
 }
 
+
+function foodGenerator() {
+  let snakeCells = snake.map(coordinate => coordinate.x * 15 + coordinate.y);
+  do {
+    food.x = Math.floor(Math.random() * 15);
+    food.y = Math.floor(Math.random() * 15);
+  }
+  while (snakeCells.includes(food.x * 15 + food.y));
+}

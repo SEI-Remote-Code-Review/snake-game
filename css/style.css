@@ -32,6 +32,10 @@ body {
   border: solid 1px;
 }
 
+.food-cell {
+  background-color: red;
+}
+
 .snake-body {
   background-color: blue;
 }
