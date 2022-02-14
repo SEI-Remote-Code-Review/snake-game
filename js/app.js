@@ -109,23 +109,23 @@ function checkMove(newCell) {
     case 'right':   
       if (snake[snake.length-1]%columns === 14) {
           winner = 0;
-          break;
         }
+        break;
     case 'left':
       if (snake[snake.length-1]%columns === 0) {
           winner = 0;
-          break;
         }
+        break;
     case 'up':
       if (snake[snake.length-1] < columns) {
           winner = 0;
-          break;
         }
+        break;
     case 'down':
       if (snake[snake.length-1] >= columns*(rows-1)) {
           winner = 0;
-          break;
         }
+        break;
     }
     if (snake.includes(newCell)) {
       winner = 0;
