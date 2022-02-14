@@ -2,12 +2,13 @@
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake, direction, snakeStart;
+let snake, direction, snakeStart, winner;
 
 /*------------------------ Cached Element References ------------------------*/
 
 const board = document.querySelector('#board');
 const startButton = document.querySelector('#start');
+const message = document.querySelector('#message');
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -27,12 +28,14 @@ init();
 function init() {
   snake = [{x:5, y:5}, {x:5, y:6}, {x:5, y:7}];
   direction = 'right';
+  winner = 1;
   render();
 }
 
 
 function render() {
-  boardCells.forEach(cell => {
+  if (winner) {
+    boardCells.forEach(cell => {
     while (cell.classList.contains('snake-body')) {
     cell.classList.remove('snake-body');
     }
@@ -41,6 +44,9 @@ function render() {
   snake.forEach(part => {
     boardCells[part.x * 15 + part.y].classList.add('snake-body');
   })
+} else {
+  message.textContent = 'You lost!'
+}
 }
 
 
@@ -56,30 +62,53 @@ function boardGenerator(columns, rows) {
   return document.querySelectorAll('.board-cell');
 }
 
+function gameStart() {
+  snakeStart = setInterval(move, 1000);
+}
 
 function move() {
   let newCoordinate = {};
   switch (direction) {
     case 'right':
-      newCoordinate.x = snake[snake.length-1].x;
-      newCoordinate.y = snake[snake.length-1].y+1;
+      moveRight(newCoordinate);
       break;
     case 'left':
-      newCoordinate.x = snake[snake.length-1].x;
-      newCoordinate.y = snake[snake.length-1].y-1;
+      moveLeft(newCoordinate);
       break;
     case 'up':
-      newCoordinate.x = snake[snake.length-1].x-1;
-      newCoordinate.y = snake[snake.length-1].y;
+      moveUp(newCoordinate);
       break;
     case 'down':
-      newCoordinate.x = snake[snake.length-1].x+1;
-      newCoordinate.y = snake[snake.length-1].y;
+      moveDown(newCoordinate);
       break;
   }
   snake.push(newCoordinate);
   snake.shift();
+  if (Object.values(newCoordinate).some(coordinate => coordinate > 14) || Object.values(newCoordinate).some(coordinate => coordinate < 0)) {
+    winner = 0;
+    clearInterval(snakeStart);
+  }
   render();
+}
+
+function moveRight(newCoordinate) {
+  newCoordinate.x = snake[snake.length-1].x;
+  newCoordinate.y = snake[snake.length-1].y+1;
+}
+
+function moveLeft (newCoordinate) {
+  newCoordinate.x = snake[snake.length-1].x;
+  newCoordinate.y = snake[snake.length-1].y-1;
+}
+
+function moveUp(newCoordinate) {
+  newCoordinate.x = snake[snake.length-1].x-1;
+  newCoordinate.y = snake[snake.length-1].y;
+}
+
+function moveDown(newCoordinate) {
+  newCoordinate.x = snake[snake.length-1].x+1;
+  newCoordinate.y = snake[snake.length-1].y;
 }
 
 function handleTurnButtons(evt) {
@@ -105,7 +134,3 @@ function handleTurnKeys(evt) {
   }
 }
 
-
-function gameStart() {
-  snakeStart = setInterval(move, 1000);
-}
