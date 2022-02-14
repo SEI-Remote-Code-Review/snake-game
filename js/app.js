@@ -73,9 +73,14 @@ function boardGenerator(columns, rows) {
 }
 
 
-function gameStart() {
-  snakeStart = setInterval(move, 500);
-  startButton.textContent = 'RESTART';
+function gameStart(evt) {
+  if (evt.target.textContent === 'PLAY') {
+    snakeStart = setInterval(move, 500);
+    playButton.textContent = 'PAUSE';
+  } else {
+    clearInterval(snakeStart);
+    playButton.textContent = 'PLAY';
+  }
 }
 
 function move() {
