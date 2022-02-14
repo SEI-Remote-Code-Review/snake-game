@@ -31,14 +31,13 @@ init();
 
 
 function init() {
-  snake = [75, 76, 77];
+  snake = [76, 77, 78];
   direction = 'right';
   foodGenerator();
   score = 0;
   winner = 1;
   restartButton.setAttribute('hidden', true);
   playButton.textContent = 'PLAY';
-  message.textContent = 'Snake!'
   render();
 }
 
@@ -63,6 +62,7 @@ function render() {
 
   boardCells[food].classList.add('food-cell');
   document.querySelector('#score').textContent = `Score: ${score}`;
+  (winner === 2) ? message.textContent = 'Good Job!' : message.textContent = 'Snake!';
 } else {
   clearInterval(snakeStart);
   message.textContent = 'You lost!'
@@ -87,7 +87,7 @@ function gameStart(evt) {
   }
   restartButton.removeAttribute('hidden');
   if (evt.target.textContent === 'PLAY') {
-    snakeStart = setInterval(move, 500);
+    snakeStart = setInterval(move, 200);
     playButton.textContent = 'PAUSE';
   } else {
     clearInterval(snakeStart);
@@ -96,6 +96,7 @@ function gameStart(evt) {
 }
 
 function move() {
+  winner = 1;
   switch (direction) {
     case 'right':   
         newCell = snake[snake.length-1] + 1;
@@ -142,7 +143,7 @@ function checkMove(newCell) {
     if (snake.includes(newCell)) {
       winner = 0;
     } else if (newCell === food) {
-      winner = 2
+      winner = 2;
     }
     return winner;
 }
@@ -152,7 +153,6 @@ function addMove(newCell) {
   if (winner === 2) {
     foodGenerator();
     score += 10;
-    winner = 1;
   } else {
     snake.shift();
   }
@@ -162,7 +162,6 @@ function handleTurnButtons(evt) {
   if (playButton.textContent === 'PLAY' || !winner) {
     return;
   }
-
   if ((evt.target.id === 'left' && direction !== 'right') || (evt.target.id === 'up' && direction !== 'down') || (evt.target.id === 'down' && direction !== 'up') || (evt.target.id === 'right' && direction !== 'left')) {
     direction = evt.target.id;
     move();
@@ -173,7 +172,6 @@ function handleTurnKeys(evt) {
   if (playButton.textContent === 'PLAY' || !winner) {
     return;
   }
-
   if (evt.code.toLowerCase() === 'arrowleft' && direction !== 'right') {
   direction = 'left';
   move();
@@ -187,7 +185,6 @@ function handleTurnKeys(evt) {
   direction = 'right';
   move();
   }
-  console.log(direction);
 }
 
 function foodGenerator() {
