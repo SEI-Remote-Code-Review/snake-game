@@ -24,7 +24,6 @@ body {
   grid-template-columns: 80% 20%;
   grid-template-rows: auto;
   grid-template-areas: 
-      "title title"
       "board score"
       "board control"
 }
@@ -35,10 +34,10 @@ main {
 }
 
 #message {
-  grid-area: title;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 7%;
 }
 
 #board {
@@ -51,6 +50,14 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#snake-control button {
+  width: 100px;
+}
+
+#vertical > button {
+  display: block;
 }
 
 #score {
@@ -79,6 +86,4 @@ main {
 .snake-body {
   background-color: blue;
 }
-
-
 

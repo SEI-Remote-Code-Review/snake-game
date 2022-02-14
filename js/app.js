@@ -91,7 +91,7 @@ function gameStart(evt) {
   }
   restartButton.removeAttribute('hidden');
   if (evt.target.textContent === 'PLAY') {
-    snakeStart = setInterval(move, 200);
+    snakeStart = setInterval(move, 300);
     playButton.textContent = 'PAUSE';
   } else {
     clearInterval(snakeStart);
