@@ -19,7 +19,11 @@ const restartButton = document.querySelector('#restart');
 document.querySelector('#snake-control').addEventListener('click', handleTurnButtons);
 document.addEventListener('keydown', handleTurnKeys);
 playButton.addEventListener('click', gameStart);
-restartButton.addEventListener('click', init);
+restartButton.addEventListener('click', () => {
+  clearInterval(snakeStart);
+  snakeStart = false;
+  init();
+});
 
 
 
@@ -91,6 +95,7 @@ function gameStart(evt) {
     playButton.textContent = 'PAUSE';
   } else {
     clearInterval(snakeStart);
+    snakeStart = false;
     playButton.textContent = 'PLAY';
   }
 }
@@ -159,7 +164,7 @@ function addMove(newCell) {
 }
 
 function handleTurnButtons(evt) {
-  if (playButton.textContent === 'PLAY' || !winner) {
+  if (!snakeStart || !winner) {
     return;
   }
   if ((evt.target.id === 'left' && direction !== 'right') || (evt.target.id === 'up' && direction !== 'down') || (evt.target.id === 'down' && direction !== 'up') || (evt.target.id === 'right' && direction !== 'left')) {
@@ -169,7 +174,7 @@ function handleTurnButtons(evt) {
 }
 
 function handleTurnKeys(evt) {
-  if (playButton.textContent === 'PLAY' || !winner) {
+  if (!snakeStart || !winner) {
     return;
   }
   if (evt.code.toLowerCase() === 'arrowleft' && direction !== 'right') {
