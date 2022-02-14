@@ -1,6 +1,6 @@
 /*-------------------------------- Constants --------------------------------*/
 
-const columns = 15;
+const columns = 20;
 const rows = 15;
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -35,7 +35,7 @@ init();
 
 
 function init() {
-  snake = [76, 77, 78];
+  snake = [81, 82, 83];
   direction = 'right';
   foodGenerator();
   score = 0;
@@ -125,7 +125,7 @@ function move() {
 function checkMove(newCell) {
   switch (direction) {
     case 'right':   
-      if (snake[snake.length-1]%columns === 14) {
+      if (snake[snake.length-1]%columns === (columns-1)) {
           winner = 0;
         }
         break;
@@ -194,7 +194,7 @@ function handleTurnKeys(evt) {
 
 function foodGenerator() {
   do {
-    food = Math.floor(Math.random() * 225);
+    food = Math.floor(Math.random() * columns * rows);
   }
   while (snake.includes(food));
 }
