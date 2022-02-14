@@ -1,9 +1,11 @@
 /*-------------------------------- Constants --------------------------------*/
 
+const columns = 15;
+const rows = 15;
+
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake, direction, snakeStart, winner;
-const food = {};
+let snake, direction, snakeStart, winner, food;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -21,16 +23,15 @@ startButton.addEventListener('click', gameStart);
 
 /*-------------------------------- Functions --------------------------------*/
 
-let boardCells = boardGenerator(15, 15);
+let boardCells = boardGenerator(columns, rows);
 
 init();
 
 
 function init() {
-  snake = [{x:5, y:2}, {x:5, y:3}, {x:5, y:4}];
+  snake = [75, 76, 77];
   direction = 'right';
   foodGenerator();
-  console.log(food);
   winner = 1;
   render();
 }
@@ -45,10 +46,10 @@ function render() {
   })
 
   snake.forEach(part => {
-    boardCells[part.x * 15 + part.y].classList.add('snake-body');
+    boardCells[part].classList.add('snake-body');
   })
 
-  boardCells[food.x * 15 + food.y].classList.add('food-cell');
+  boardCells[food].classList.add('food-cell');
 } else {
   message.textContent = 'You lost!'
 }
@@ -68,52 +69,47 @@ function boardGenerator(columns, rows) {
 }
 
 function gameStart() {
-  snakeStart = setInterval(move, 1000);
+  snakeStart = setInterval(move, 500);
 }
 
 function move() {
-  let newCoordinate = {};
+  let snakeHead = snake[snake.length-1];
   switch (direction) {
-    case 'right':
-      moveRight(newCoordinate);
-      break;
-    case 'left':
-      moveLeft(newCoordinate);
-      break;
-    case 'up':
-      moveUp(newCoordinate);
-      break;
-    case 'down':
-      moveDown(newCoordinate);
-      break;
-  }
-  snake.push(newCoordinate);
-  snake.shift();
-  if (Object.values(newCoordinate).some(coordinate => coordinate > 14) || Object.values(newCoordinate).some(coordinate => coordinate < 0)) {
-    winner = 0;
-    clearInterval(snakeStart);
-  }
+  case 'right':   
+    if (snakeHead%columns === 14) {
+        winner = 0;
+        break;
+      } else {
+          snake.push(snakeHead + 1);
+          break;
+      }
+  case 'left':
+    if (snakeHead%columns === 0) {
+        winner = 0;
+        break;
+      } else {
+          snake.push(snakeHead - 1);
+          break;
+      }
+  case 'up':
+    if (snakeHead < columns) {
+        winner = 0;
+        break;
+      } else {
+          snake.push(snakeHead - 15);
+          break;
+      }
+  case 'down':
+    if (snakeHead >= columns*(rows-1)) {
+        winner = 0;
+        break;
+      } else {
+          snake.push(snakeHead + 15);
+          break;
+      }
+    }
+    snake.shift();
   render();
-}
-
-function moveRight(newCoordinate) {
-  newCoordinate.x = snake[snake.length-1].x;
-  newCoordinate.y = snake[snake.length-1].y+1;
-}
-
-function moveLeft (newCoordinate) {
-  newCoordinate.x = snake[snake.length-1].x;
-  newCoordinate.y = snake[snake.length-1].y-1;
-}
-
-function moveUp(newCoordinate) {
-  newCoordinate.x = snake[snake.length-1].x-1;
-  newCoordinate.y = snake[snake.length-1].y;
-}
-
-function moveDown(newCoordinate) {
-  newCoordinate.x = snake[snake.length-1].x+1;
-  newCoordinate.y = snake[snake.length-1].y;
 }
 
 function handleTurnButtons(evt) {
@@ -141,10 +137,8 @@ function handleTurnKeys(evt) {
 
 
 function foodGenerator() {
-  let snakeCells = snake.map(coordinate => coordinate.x * 15 + coordinate.y);
   do {
-    food.x = Math.floor(Math.random() * 15);
-    food.y = Math.floor(Math.random() * 15);
+    food = Math.floor(Math.random() * 225);
   }
-  while (snakeCells.includes(food.x * 15 + food.y));
+  while (snake.includes(food));
 }
