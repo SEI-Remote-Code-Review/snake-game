@@ -17,19 +17,24 @@ body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	margin: 0;
-  height: 100vh;
+  /* height: 100vh; */
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-columns: auto;
+  grid-template-columns: 80% 20%;
   grid-template-rows: auto;
   grid-template-areas: 
       "board score"
       "board control"
 }
 
+button {
+  cursor: pointer;
+}
+
 main {
   grid-area: board;
+  margin-left: 20vmin;
 }
 
 #message {
@@ -41,28 +46,39 @@ main {
 
 #board {
   display: grid;
+  border: solid 4px;
   /* grid-template-rows: repeat(15, 5vmin);
   grid-template-columns: repeat(15, 5vmin); */
 }
 
 #snake-control {
-  margin-top: 5%;
+  margin: 2% auto 10%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #snake-control button {
-  width: 7vmin;
+  width: 100px;
+  border-radius: 30px;
+}
+
+#vertical {
+  margin: auto 5%;
 }
 
 #vertical > button {
   display: block;
 }
 
+#down {
+  margin-top: 20%;
+}
+
 #score {
   grid-area: score;
   justify-self: start;
+  border: 4px ridge greenyellow;
 }
 
 #game-control {

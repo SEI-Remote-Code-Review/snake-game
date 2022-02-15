@@ -5,7 +5,7 @@ const rows = 15;
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake, direction, snakeStart, winner, food, score, newCell;
+let snake, direction, snakeStart, winner, food, score;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -49,18 +49,14 @@ function init() {
 function render() {
   if (winner) {
     boardCells.forEach(cell => {
-      if (cell.classList.contains('snake-body')) {
-      cell.classList.remove('snake-body');
-    }
-      if (cell.classList.contains('food-cell')) {
-      cell.classList.remove('food-cell');
-    }
+      removeClass(cell, 'snake-body');
+      removeClass(cell, 'food-cell');
   })
 
   snake.forEach(part => {
-    if (boardCells[part].classList.contains('food-cell')) {
-      boardCells[part].classList.remove('food-cell');
-    }
+    // if (boardCells[part].classList.contains('food-cell')) {
+    //   boardCells[part].classList.remove('food-cell');
+    // }
     boardCells[part].classList.add('snake-body');
   })
 
@@ -71,6 +67,12 @@ function render() {
   clearInterval(snakeStart);
   message.textContent = 'You lost!'
 }
+}
+
+function removeClass(element, className) {
+  if (element.classList.contains(className)) {
+    element.classList.remove(className);
+  }
 }
 
 function boardGenerator(columns, rows) {
@@ -102,6 +104,7 @@ function gameStart(evt) {
 
 function move() {
   winner = 1;
+  let newCell;
   switch (direction) {
     case 'right':   
         newCell = snake[snake.length-1] + 1;
