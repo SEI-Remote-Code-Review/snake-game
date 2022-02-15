@@ -16,27 +16,30 @@
   <script defer src="./js/app.js"></script>
 </head>
 <body>  
-  
+  <div id="message">
+    <h1>Game play</h1>
+    <p>Use arrow keys or buttons on the screen to control the snake. Eat to gain score. Don't run into yourself or into the board edge. Good luck!</p>
+  </div>
   <main>
-    <div id="message">
-    </div>
-
+    <h1>Welcome to the snake game!</h1>
     <section id="board"></section>
     <div id="snake-control">
-      <button id="left">LEFT</button>
+      <button id="left" type="button">LEFT</button>
       <div id="vertical">
-        <button id="up">UP</button>
-        <button id="down">DOWN</button>
+        <button id="up" type="button">UP</button>
+        <button id="down" type="button">DOWN</button>
       </div>
-      <button id="right">RIGHT</button>
+      <button id="right" type="button">RIGHT</button>
     </div>
   </main>
   
   <aside>
-    <div id="score"></div>
+    <div id="score">
+      <h1>good job</h1>
+    </div>
     <div id="game-control">
-      <button id="restart">RESTART</button>
-      <button id="play">PLAY</button>
+      <button id="restart" type="button">RESTART</button>
+      <button id="play" type="button">PLAY</button>
     </div>
   </aside>
 

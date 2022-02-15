@@ -11,8 +11,8 @@ let snake, direction, snakeStart, winner, food, score;
 
 const board = document.querySelector('#board');
 const playButton = document.querySelector('#play');
-const message = document.querySelector('#message');
 const restartButton = document.querySelector('#restart');
+const scoreMessage = document.querySelector('#score');
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -61,8 +61,7 @@ function render() {
     })
 
     boardCells[food].classList.add('food-cell');
-    document.querySelector('#score').textContent = `Score: ${score}`;
-    (winner === 2) ? message.textContent = 'Good Job!' : message.textContent = 'Snake!';
+    (score === 0) ? scoreMessage.textContent = `Score: ${score}` : scoreMessage.innerHTML = `Score: ${score} <br> Keep it up!`;
   } else {
     clearInterval(snakeStart);
     message.textContent = 'You lost!'
@@ -70,8 +69,8 @@ function render() {
 }
 
 function boardGenerator(columns, rows) {
-  board.style.gridTemplateRows = `repeat(${rows},5vmin)`;
-  board.style.gridTemplateColumns = `repeat(${columns},5vmin)`;
+  board.style.gridTemplateRows = `repeat(${rows},4vmin)`;
+  board.style.gridTemplateColumns = `repeat(${columns},4vmin)`;
   for (let i = 0; i < (columns*rows); i++) {
     let cell = document.createElement('div');
     cell.setAttribute('class', 'board-cell');

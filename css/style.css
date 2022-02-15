@@ -14,7 +14,7 @@ body {
   background: url('../assets/logo1.jpg') white;
   background-size: cover;
   text-align: center;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	margin: 0;
@@ -25,27 +25,43 @@ body {
 }
 
 main {
-  margin-right: 2%; 
+  margin: 0 2%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-
-
 
 button {
   cursor: pointer;
 }
 
 
+.board-cell {
+  background-color: white;
+  border: solid 1px;
+}
+
+.food-cell {
+  background-color: red;
+}
+
+.snake-body {
+  background-color: rgb(57, 184, 57);
+}
+
+.snake-head {
+  background-color: rgb(1, 91, 1);
+}
 
 #message {
-  padding-top: 12%;
-  margin-bottom: 7%;
+  width: 30vmin;
+  background-color: honeydew;
 }
 
 #board {
   display: grid;
   border: solid 4px;
-  /* grid-template-rows: repeat(15, 5vmin);
-  grid-template-columns: repeat(15, 5vmin); */
 }
 
 #snake-control {
@@ -73,38 +89,19 @@ button {
 }
 
 #score {
-  grid-area: score;
-  border: 4px ridge greenyellow;
-}
-
-#game-control {
-  grid-area: control;
-  justify-self: start;
+  padding: 2vmin;
+  background-color: white;
+  border: 5px ridge greenyellow;
+  margin-bottom: 30vmin;
 }
 
 #game-control > button {
   display: block;
-  width: 200px;
+  width: 170px;
   border-radius: 30px;
 }
 
-#score {
-  margin-bottom: 45vmin;
+#restart {
+  margin-bottom: 2%;
 }
 
-.board-cell {
-  background-color: white;
-  border: solid 1px;
-}
-
-.food-cell {
-  background-color: red;
-}
-
-.snake-body {
-  background-color: rgb(57, 184, 57);
-}
-
-.snake-head {
-  background-color: rgb(1, 91, 1);
-}
