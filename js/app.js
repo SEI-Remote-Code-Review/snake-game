@@ -35,7 +35,7 @@ init();
 
 
 function init() {
-  snake = [81, 82, 83];
+  snake = [76, 77, 78];
   direction = 'right';
   foodGenerator();
   score = 0;
@@ -49,9 +49,7 @@ function init() {
 function render() {
   if (winner) {
     boardCells.forEach(cell => {
-      removeClass(cell, 'snake-body');
-      removeClass(cell, 'food-cell');
-      removeClass(cell, 'snake-head');
+      cell.classList.remove('snake-head', 'snake-body','food-cell' )
     })
 
     snake.forEach((part, idx) => {
@@ -68,12 +66,6 @@ function render() {
   } else {
     clearInterval(snakeStart);
     message.textContent = 'You lost!'
-  }
-}
-
-function removeClass(element, className) {
-  if (element.classList.contains(className)) {
-    element.classList.remove(className);
   }
 }
 
