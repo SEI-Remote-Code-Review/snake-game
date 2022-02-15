@@ -103,3 +103,6 @@ main {
   background-color: blue;
 }
 
+.snake-head {
+  background-color: green;
+}

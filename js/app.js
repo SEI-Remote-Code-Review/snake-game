@@ -51,22 +51,24 @@ function render() {
     boardCells.forEach(cell => {
       removeClass(cell, 'snake-body');
       removeClass(cell, 'food-cell');
-  })
+      removeClass(cell, 'snake-head');
+    })
 
-  snake.forEach(part => {
-    // if (boardCells[part].classList.contains('food-cell')) {
-    //   boardCells[part].classList.remove('food-cell');
-    // }
-    boardCells[part].classList.add('snake-body');
-  })
+    snake.forEach((part, idx) => {
+      if (idx === snake.length-1) {
+        boardCells[part].classList.add('snake-head');
+      } else {
+       boardCells[part].classList.add('snake-body');
+      }
+    })
 
-  boardCells[food].classList.add('food-cell');
-  document.querySelector('#score').textContent = `Score: ${score}`;
-  (winner === 2) ? message.textContent = 'Good Job!' : message.textContent = 'Snake!';
-} else {
-  clearInterval(snakeStart);
-  message.textContent = 'You lost!'
-}
+    boardCells[food].classList.add('food-cell');
+    document.querySelector('#score').textContent = `Score: ${score}`;
+    (winner === 2) ? message.textContent = 'Good Job!' : message.textContent = 'Snake!';
+  } else {
+    clearInterval(snakeStart);
+    message.textContent = 'You lost!'
+  }
 }
 
 function removeClass(element, className) {
