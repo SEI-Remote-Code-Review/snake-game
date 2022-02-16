@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background: url('../assets/logo.jpeg') white;
+  background: url('../assets/logo.jpeg') grey;
   background-size: 40%;
   text-align: center;
   font-size: 2.2rem;
@@ -37,22 +37,20 @@ button {
 }
 
 
-.board-cell {
-  background-color: white;
-  border: solid 1px;
-}
 
 .food-cell {
-  background: url('../assets/cherry.png') white;
+  background: url('../assets/cherry.png');
   background-size: cover;
 }
 
 .snake-body {
-  background-color: rgb(57, 184, 57);
+  background-color: #548CFF;
+  border: solid 1px;
 }
 
 .snake-head {
-  background-color: rgb(1, 91, 1);
+  background-color: #2666CF;
+  border: solid 1px;
 }
 
 #title {
@@ -66,13 +64,15 @@ button {
 
 #message {
   width: 20vmin;
-  background-color: honeydew;
+  background-color: white;
   margin-bottom: 30vmin;
 }
 
 #board {
   display: grid;
   border: solid 4px;
+  background: url('../assets/board.png');
+  background-size: cover;
 }
 
 #snake-control {
