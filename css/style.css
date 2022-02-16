@@ -33,6 +33,9 @@ main {
 
 button {
   cursor: pointer;
+  border: solid 3px rgb(55, 54, 54);
+  /* border: thick double rgb(55, 54, 54); */
+  font-size: 2.8rem;
 }
 
 button:hover{
@@ -98,12 +101,12 @@ p {
 
 #snake-control button {
   background-color: #2FDD92;
-  width: 100px;
+  width: 120px;
   border-radius: 30px;
 }
 
 #vertical {
-  margin: auto 30px;
+  margin: auto 20px;
 }
 
 #vertical > button {
@@ -111,7 +114,7 @@ p {
 }
 
 #down {
-  margin-top: 30%;
+  margin-top: 20%;
 }
 
 #score {
@@ -147,15 +150,14 @@ p {
   #rules {
     display: none;
   }
-}
-
-@media only screen and (max-width: 700px) {
   #title {
     font-size: 3rem;
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 650px) {
+  
+
   #snake-control button {
     font-size: 1.5rem;
     width: 60px;
@@ -163,7 +165,7 @@ p {
 
   #game-control > button {
     font-size: 1.5rem;
-    width: 100px;
+    width: 80px;
   }
 
   #title {
@@ -175,12 +177,12 @@ p {
   }
 
   #score {
-    width: 100px;
+    width: 90px;
     height: 90px;
   }
 
   #vertical {
-    margin: auto 20px;
+    margin: auto 10px;
   }
 
 }

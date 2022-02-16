@@ -2,6 +2,9 @@
 
 const columns = 15;
 const rows = 15;
+const snakeMoves = new Audio("./assets/move.wav");
+const snakeEats = new Audio("./assets/eat.wav");
+const lossSound = new Audio("./assets/lost.wav");
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -43,7 +46,7 @@ function init() {
   restartButton.setAttribute('hidden', true);
   playButton.textContent = 'PLAY';
   board.classList.remove('animate__shakeY');
-  
+
   render();
 }
 
@@ -67,6 +70,8 @@ function render() {
   } else {
     board.classList.add('animate__shakeY');
     clearInterval(snakeStart);
+    lossSound.volume = .10;
+    lossSound.play();
     scoreMessage.innerHTML = `Score: ${score} <br> Game over <br> Press Restart to play again`;
   }
 }
@@ -153,8 +158,12 @@ function checkMove(newCell) {
 }
 
 function addMove(newCell) {
+  snakeMoves.volume = .10;
+  snakeMoves.play();
   snake.push(newCell);
   if (winner === 2) {
+    snakeEats.volume = .10;
+    snakeEats.play();
     foodGenerator();
     score += 10;
   } else {
