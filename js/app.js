@@ -12,7 +12,7 @@ let snake, direction, snakeStart, winner, food, score;
 const board = document.querySelector('#board');
 const playButton = document.querySelector('#play');
 const restartButton = document.querySelector('#restart');
-const scoreMessage = document.querySelector('#score');
+const scoreMessage = document.querySelector('#score p');
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -61,10 +61,10 @@ function render() {
     })
 
     boardCells[food].classList.add('food-cell');
-    (score === 0) ? scoreMessage.textContent = `Your score: ${score}` : scoreMessage.innerHTML = `Your score: ${score} <br> Keep it up!`;
+    (score === 0) ? scoreMessage.textContent = `Score: ${score}` : scoreMessage.innerHTML = `Score: ${score} <br> Keep it up!`;
   } else {
     clearInterval(snakeStart);
-    scoreMessage.innerHTML = `Your score: ${score} <br> Game over <br> Press Restart to play again`;
+    scoreMessage.innerHTML = `Score: ${score} <br> Game over <br> Press Restart to play again`;
   }
 }
 

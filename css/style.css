@@ -15,8 +15,7 @@ body {
   background-size: 40%;
   text-align: center;
   font-size: 2.2rem;
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: 'Redressed', cursive, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	margin: 0;
   height: 100vh;
   display: flex;
@@ -36,7 +35,9 @@ button {
   cursor: pointer;
 }
 
-
+button:hover{
+  border-color: #FEE440;
+}
 
 .food-cell {
   background: url('../assets/cherry.png');
@@ -54,7 +55,12 @@ button {
 }
 
 #title {
+  font-family: 'Redressed', cursive;
+  font-size: 4.5rem;
   margin: 2% auto;
+  border: solid;
+  background-color: #90AACB;
+  padding: 3px;
 }
 
 #logo {
@@ -62,10 +68,21 @@ button {
   margin-bottom: 2%;
 }
 
-#message {
-  width: 20vmin;
+#rules {
+  width: 300px;
   background-color: white;
-  margin-bottom: 30vmin;
+  margin-bottom: 20vmin;
+  border: solid;
+  background-color: #90AACB;
+}
+
+#rules h1 {
+  font-size: 3.5rem;
+}
+
+p {
+  font-size: 2.8rem;
+  line-height: 1.1;
 }
 
 #board {
@@ -83,6 +100,7 @@ button {
 }
 
 #snake-control button {
+  background-color: #84DFFF;
   width: 100px;
   border-radius: 30px;
 }
@@ -100,11 +118,15 @@ button {
 }
 
 #score {
-  height: 16vmin;
-  padding: 1vmin;
-  background-color: white;
+  width: 200px;
+  background-color: #90AACB;
   border: 5px ridge greenyellow;
   margin-bottom: 20vmin;
+  padding: 10px 0;
+}
+
+#game-control {
+  margin-bottom: 5vmin;
 }
 
 #game-control > button {
@@ -115,5 +137,9 @@ button {
 
 #restart {
   margin-bottom: 2%;
+  background-color: #FF865E;
 }
 
+#play {
+  background-color: #2FDD92;
+}
