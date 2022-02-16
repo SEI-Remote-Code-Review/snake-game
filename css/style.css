@@ -97,13 +97,13 @@ p {
 }
 
 #snake-control button {
-  background-color: #84DFFF;
+  background-color: #2FDD92;
   width: 100px;
   border-radius: 30px;
 }
 
 #vertical {
-  margin: auto 5%;
+  margin: auto 30px;
 }
 
 #vertical > button {
@@ -111,12 +111,12 @@ p {
 }
 
 #down {
-  margin-top: 20%;
+  margin-top: 30%;
 }
 
 #score {
   width: 200px;
-  height: 150px;
+  height: 170px;
   background-color: #90AACB;
   border: 5px ridge greenyellow;
   margin-bottom: 15vmin;
@@ -124,7 +124,8 @@ p {
 }
 
 #game-control {
-  margin-bottom: 15vmin;
+  height: 100px;
+  margin-bottom: 5vmin;
 }
 
 #game-control > button {
@@ -135,7 +136,7 @@ p {
 
 #restart {
   margin-bottom: 2%;
-  background-color: #2FDD92;
+  background-color: #86C6F4;
 }
 
 #play {
@@ -150,7 +151,7 @@ p {
 
 @media only screen and (max-width: 700px) {
   #title {
-    font-size: 2.4rem;
+    font-size: 3rem;
   }
 }
 
@@ -170,12 +171,16 @@ p {
   }
   
   p {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
   }
 
   #score {
     width: 100px;
-    height: 100px;
+    height: 90px;
+  }
+
+  #vertical {
+    margin: auto 20px;
   }
 
 }
