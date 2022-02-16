@@ -61,10 +61,10 @@ function render() {
     })
 
     boardCells[food].classList.add('food-cell');
-    (score === 0) ? scoreMessage.textContent = `Score: ${score}` : scoreMessage.innerHTML = `Score: ${score} <br> Keep it up!`;
+    (score === 0) ? scoreMessage.textContent = `Your score: ${score}` : scoreMessage.innerHTML = `Your score: ${score} <br> Keep it up!`;
   } else {
     clearInterval(snakeStart);
-    message.textContent = 'You lost!'
+    scoreMessage.innerHTML = `Your score: ${score} <br> Game over <br> Press Restart to play again`;
   }
 }
 
