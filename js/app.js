@@ -42,6 +42,8 @@ function init() {
   winner = 1;
   restartButton.setAttribute('hidden', true);
   playButton.textContent = 'PLAY';
+  board.classList.remove('animate__shakeY');
+  
   render();
 }
 
@@ -63,6 +65,7 @@ function render() {
     boardCells[food].classList.add('food-cell');
     (score === 0) ? scoreMessage.textContent = `Score: ${score}` : scoreMessage.innerHTML = `Score: ${score} <br> Keep it up!`;
   } else {
+    board.classList.add('animate__shakeY');
     clearInterval(snakeStart);
     scoreMessage.innerHTML = `Score: ${score} <br> Game over <br> Press Restart to play again`;
   }
@@ -86,7 +89,7 @@ function gameStart(evt) {
   }
   restartButton.removeAttribute('hidden');
   if (evt.target.textContent === 'PLAY') {
-    snakeStart = setInterval(move, 300);
+    snakeStart = setInterval(move, 500);
     playButton.textContent = 'PAUSE';
   } else {
     clearInterval(snakeStart);
