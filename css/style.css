@@ -47,11 +47,13 @@ button:hover{
 .snake-body {
   background-color: #548CFF;
   border: solid 1px;
+  border-radius: 14px;
 }
 
 .snake-head {
   background-color: #2666CF;
   border: solid 1px;
+  border-radius: 7px;
 }
 
 #title {
@@ -61,11 +63,6 @@ button:hover{
   border: solid;
   background-color: #90AACB;
   padding: 3px;
-}
-
-#logo {
-  width: 40vmin;
-  margin-bottom: 2%;
 }
 
 #rules {
@@ -119,14 +116,15 @@ p {
 
 #score {
   width: 200px;
+  height: 150px;
   background-color: #90AACB;
   border: 5px ridge greenyellow;
-  margin-bottom: 20vmin;
+  margin-bottom: 15vmin;
   padding: 10px 0;
 }
 
 #game-control {
-  margin-bottom: 5vmin;
+  margin-bottom: 15vmin;
 }
 
 #game-control > button {
@@ -137,9 +135,47 @@ p {
 
 #restart {
   margin-bottom: 2%;
-  background-color: #FF865E;
+  background-color: #2FDD92;
 }
 
 #play {
-  background-color: #2FDD92;
+  background-color:  #FF865E;
+}
+
+@media only screen and (max-width: 900px) {
+  #rules {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #title {
+    font-size: 2.4rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #snake-control button {
+    font-size: 1.5rem;
+    width: 60px;
+  }
+
+  #game-control > button {
+    font-size: 1.5rem;
+    width: 100px;
+  }
+
+  #title {
+    font-size: 1.8rem;
+  }
+  
+  p {
+    font-size: 1.8rem;
+  }
+
+  #score {
+    width: 100px;
+    height: 100px;
+  }
+
 }
