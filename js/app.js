@@ -5,7 +5,9 @@ const rows = 15;
 const snakeMoves = new Audio("./assets/move.wav");
 const snakeEats = new Audio("./assets/eat.wav");
 const lossSound = new Audio("./assets/lost.wav");
-
+snakeMoves.volume = .10;
+snakeEats.volume = .10;
+lossSound.volume = .10;
 /*---------------------------- Variables (state) ----------------------------*/
 
 let snake, direction, snakeStart, winner, food, score, speed;
@@ -16,6 +18,7 @@ const board = document.querySelector('#board');
 const playButton = document.querySelector('#play');
 const restartButton = document.querySelector('#restart');
 const scoreMessage = document.querySelector('#score p');
+const boardCells = boardGenerator(columns, rows);
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -32,21 +35,19 @@ restartButton.addEventListener('click', () => {
 
 /*-------------------------------- Functions --------------------------------*/
 
-let boardCells = boardGenerator(columns, rows);
-
 init();
 
 
 function init() {
   snake = [76, 77, 78];
   direction = 'right';
-  foodGenerator();
   score = 0;
   winner = 1;
   speed = 800;
   restartButton.setAttribute('hidden', true);
   playButton.textContent = 'PLAY';
   board.classList.remove('animate__shakeY');
+  foodGenerator();
   render();
 }
 
@@ -54,28 +55,26 @@ function init() {
 function render() {
   if (winner) {
     boardCells.forEach(cell => {
-      cell.classList.remove('snake-head', 'snake-body','food-cell' )
+      cell.classList.remove('snake-head', 'snake-body','food-cell');
     })
 
     snake.forEach((part, idx) => {
       if (idx === snake.length-1) {
         boardCells[part].classList.add('snake-head');
       } else {
-       boardCells[part].classList.add('snake-body');
+        boardCells[part].classList.add('snake-body');
       }
     })
 
     boardCells[food].classList.add('food-cell');
     (score === 0) ? scoreMessage.textContent = `Score: ${score}` : scoreMessage.innerHTML = `Score: ${score} <br> Keep it up!`;
     if (winner === 2) {
-      
       clearInterval(snakeStart);
       snakeStart = setInterval(move, speed);
     }
   } else {
     board.classList.add('animate__shakeY');
     clearInterval(snakeStart);
-    lossSound.volume = .10;
     lossSound.play();
     scoreMessage.innerHTML = `Score: ${score} <br> Game over <br> Press Restart to play again`;
   }
@@ -98,7 +97,7 @@ function gameStart(evt) {
     return;
   }
   restartButton.removeAttribute('hidden');
-  if (evt.target.textContent === 'PLAY') {
+  if (evt.target.textContent.toLowerCase() === 'play') {
     snakeStart = setInterval(move, speed);
     playButton.textContent = 'PAUSE';
   } else {
@@ -126,7 +125,7 @@ function move() {
         break;
   }
   if (checkMove(newCell)) {
-  addMove(newCell);
+    addMove(newCell);
   }
   render();
 }
@@ -163,16 +162,14 @@ function checkMove(newCell) {
 }
 
 function addMove(newCell) {
-  snakeMoves.volume = .10;
-  snakeMoves.play();
   snake.push(newCell);
   if (winner === 2) {
-    snakeEats.volume = .10;
     snakeEats.play();
     foodGenerator();
     score += 10;
     speed -= 20;
   } else {
+    snakeMoves.play();
     snake.shift();
   }
 }
