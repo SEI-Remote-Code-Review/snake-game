@@ -191,17 +191,8 @@ function handleTurnKeys(evt) {
   if (!snakeStart || !winner) {
     return;
   }
-  if (evt.code.toLowerCase() === 'arrowleft' && direction !== 'right') {
-  direction = 'left';
-  move();
-  } else if (evt.code.toLowerCase() === 'arrowup' && direction !== 'down') {
-  direction = 'up';
-  move();
-  } else if(evt.code.toLowerCase() === 'arrowdown' && direction !== 'up') {
-  direction = 'down';
-  move();
-  } else if (evt.code.toLowerCase() === 'arrowright' && direction !== 'left') {
-  direction = 'right';
+  if (evt.code.toLowerCase() === 'arrowleft' && direction !== 'right' || evt.code.toLowerCase() === 'arrowup' && direction !== 'down' || evt.code.toLowerCase() === 'arrowdown' && direction !== 'up' || evt.code.toLowerCase() === 'arrowright' && direction !== 'left') {
+  direction = evt.code.toLowerCase().split('arrow')[1];
   move();
   }
 }
