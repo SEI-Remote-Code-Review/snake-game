@@ -47,6 +47,7 @@ function init() {
   restartButton.setAttribute('hidden', true);
   playButton.textContent = 'PLAY';
   board.classList.remove('animate__shakeY');
+  scoreMessage.classList.remove('animate__shakeY');
   foodGenerator();
   render();
 }
@@ -73,24 +74,13 @@ function render() {
       snakeStart = setInterval(move, speed);
     }
   } else {
-    board.classList.add('animate__shakeY');
     clearInterval(snakeStart);
     lossSound.play();
     scoreMessage.innerHTML = `Score: ${score} <br> Game over <br> Press Restart to play again`;
+    board.classList.add('animate__shakeY');
+    scoreMessage.classList.add('animate__shakeY');
   }
 }
-
-function boardGenerator(columns, rows) {
-  board.style.gridTemplateRows = `repeat(${rows},4vmin)`;
-  board.style.gridTemplateColumns = `repeat(${columns},4vmin)`;
-  for (let i = 0; i < (columns*rows); i++) {
-    let cell = document.createElement('div');
-    cell.setAttribute('class', 'board-cell');
-    board.appendChild(cell);
-  }
-  return document.querySelectorAll('.board-cell');
-}
-
 
 function gameStart(evt) {
   if (!winner) {
@@ -109,56 +99,57 @@ function gameStart(evt) {
 
 function move() {
   winner = 1;
-  let newCell;
+  let firstCell = snake[snake.length-1], newCell;
   switch (direction) {
     case 'right':   
-        newCell = snake[snake.length-1] + 1;
+        newCell = firstCell + 1;
         break;
     case 'left':
-        newCell = snake[snake.length-1] - 1;
+        newCell = firstCell - 1;
         break;
     case 'up':
-        newCell = snake[snake.length-1] - columns;
+        newCell = firstCell - columns;
         break;
     case 'down':
-        newCell = snake[snake.length-1] + columns;
+        newCell = firstCell + columns;
         break;
   }
-  if (checkMove(newCell)) {
+  if (checkMove(firstCell, newCell)) {
     addMove(newCell);
   }
   render();
 }
 
-function checkMove(newCell) {
-  switch (direction) {
-    case 'right':   
-      if (snake[snake.length-1]%columns === (columns-1)) {
+function checkMove(firstCell, newCell) {
+  if (snake.includes(newCell)) {
+    return winner = 0;
+  } else if (newCell === food) {
+    return winner = 2;
+  } else { 
+    switch (direction) {
+      case 'right':   
+        if (firstCell%columns === (columns-1)) {
           winner = 0;
         }
         break;
-    case 'left':
-      if (snake[snake.length-1]%columns === 0) {
+      case 'left':
+        if (firstCell%columns === 0) {
           winner = 0;
         }
         break;
-    case 'up':
-      if (snake[snake.length-1] < columns) {
+      case 'up':
+        if (newCell < 0) {
           winner = 0;
         }
         break;
-    case 'down':
-      if (snake[snake.length-1] >= columns*(rows-1)) {
-          winner = 0;
+      case 'down':
+        if (newCell >= columns*rows) {
+        winner = 0;
         }
         break;
-    }
-    if (snake.includes(newCell)) {
-      winner = 0;
-    } else if (newCell === food) {
-      winner = 2;
     }
     return winner;
+  }
 }
 
 function addMove(newCell) {
@@ -167,7 +158,7 @@ function addMove(newCell) {
     snakeEats.play();
     foodGenerator();
     score += 10;
-    speed -= 20;
+    speed -= 5;
   } else {
     snakeMoves.play();
     snake.shift();
@@ -192,6 +183,18 @@ function handleTurnKeys(evt) {
   direction = evt.code.toLowerCase().split('arrow')[1];
   move();
   }
+}
+
+
+function boardGenerator(columns, rows) {
+  board.style.gridTemplateRows = `repeat(${rows},4vmin)`;
+  board.style.gridTemplateColumns = `repeat(${columns},4vmin)`;
+  for (let i = 0; i < (columns*rows); i++) {
+    let cell = document.createElement('div');
+    cell.setAttribute('class', 'board-cell');
+    board.appendChild(cell);
+  }
+  return document.querySelectorAll('.board-cell');
 }
 
 function foodGenerator() {
