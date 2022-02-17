@@ -60,7 +60,7 @@ button:hover{
 
 #title {
   font-family: 'Redressed', cursive;
-  font-size: 4.5rem;
+  font-size: 4rem;
   margin: 2% auto;
   border: solid;
   background-color: #a5cafa;
@@ -117,12 +117,12 @@ p {
 }
 
 #score {
-  width: 180px;
-  height: 170px;
+  width: 170px;
+  height: 160px;
   background-color: #a5cafa;
   border: 5px ridge greenyellow;
   margin-bottom: 15vmin;
-  padding: 10px 0;
+  padding: 7px 0;
 }
 
 #game-control {

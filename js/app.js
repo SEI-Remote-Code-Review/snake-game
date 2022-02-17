@@ -5,9 +5,9 @@ const rows = 15;
 const snakeMoves = new Audio("./assets/move.wav");
 const snakeEats = new Audio("./assets/eat.wav");
 const lossSound = new Audio("./assets/lost.wav");
-snakeMoves.volume = .10;
-snakeEats.volume = .10;
-lossSound.volume = .10;
+snakeMoves.volume = .05;
+snakeEats.volume = .01;
+lossSound.volume = .03;
 /*---------------------------- Variables (state) ----------------------------*/
 
 let snake, direction, snakeStart, winner, food, score, speed;
