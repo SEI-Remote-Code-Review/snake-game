@@ -8,7 +8,7 @@ const lossSound = new Audio("./assets/lost.wav");
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake, direction, snakeStart, winner, food, score;
+let snake, direction, snakeStart, winner, food, score, speed;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -43,10 +43,10 @@ function init() {
   foodGenerator();
   score = 0;
   winner = 1;
+  speed = 800;
   restartButton.setAttribute('hidden', true);
   playButton.textContent = 'PLAY';
   board.classList.remove('animate__shakeY');
-
   render();
 }
 
@@ -67,6 +67,11 @@ function render() {
 
     boardCells[food].classList.add('food-cell');
     (score === 0) ? scoreMessage.textContent = `Score: ${score}` : scoreMessage.innerHTML = `Score: ${score} <br> Keep it up!`;
+    if (winner === 2) {
+      
+      clearInterval(snakeStart);
+      snakeStart = setInterval(move, speed);
+    }
   } else {
     board.classList.add('animate__shakeY');
     clearInterval(snakeStart);
@@ -94,7 +99,7 @@ function gameStart(evt) {
   }
   restartButton.removeAttribute('hidden');
   if (evt.target.textContent === 'PLAY') {
-    snakeStart = setInterval(move, 500);
+    snakeStart = setInterval(move, speed);
     playButton.textContent = 'PAUSE';
   } else {
     clearInterval(snakeStart);
@@ -166,6 +171,7 @@ function addMove(newCell) {
     snakeEats.play();
     foodGenerator();
     score += 10;
+    speed -= 20;
   } else {
     snake.shift();
   }
