@@ -63,16 +63,16 @@ button:hover{
   font-size: 4.5rem;
   margin: 2% auto;
   border: solid;
-  background-color: #90AACB;
+  background-color: #a5cafa;
   padding: 3px;
 }
 
 #rules {
   width: 300px;
-  background-color: white;
   margin-bottom: 20vmin;
   border: solid;
-  background-color: #90AACB;
+  background-color: #a5cafa;
+  color: rgb(0, 0, 0);
 }
 
 #rules h1 {
@@ -119,7 +119,7 @@ p {
 #score {
   width: 180px;
   height: 170px;
-  background-color: #90AACB;
+  background-color: #a5cafa;
   border: 5px ridge greenyellow;
   margin-bottom: 15vmin;
   padding: 10px 0;
@@ -155,8 +155,6 @@ p {
 }
 
 @media only screen and (max-width: 650px) {
-  
-
   #snake-control button {
     font-size: 1.5rem;
     width: 60px;
