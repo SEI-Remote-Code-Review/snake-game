@@ -41,6 +41,11 @@ button:hover{
   border-color: #FEE440;
 }
 
+p {
+  font-size: 2.8rem;
+  line-height: 1.1;
+}
+
 .food-cell {
   background: url('../assets/cherry.png');
   background-size: cover;
@@ -58,15 +63,6 @@ button:hover{
   border-radius: 7px;
 }
 
-#title {
-  font-family: 'Redressed', cursive;
-  font-size: 4rem;
-  margin: 2% auto;
-  border: solid;
-  background-color: #a5cafa;
-  padding: 3px;
-}
-
 #rules {
   width: 300px;
   margin-bottom: 20vmin;
@@ -79,9 +75,12 @@ button:hover{
   font-size: 3.5rem;
 }
 
-p {
-  font-size: 2.8rem;
-  line-height: 1.1;
+#title {
+  font-size: 4rem;
+  margin: 2% auto;
+  border: solid;
+  background-color: #a5cafa;
+  padding: 3px;
 }
 
 #board {
@@ -92,7 +91,7 @@ p {
 }
 
 #snake-control {
-  margin: 2% auto 10%;
+  margin: 2% auto 6%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,12 +148,17 @@ p {
   #rules {
     display: none;
   }
+
   #title {
     font-size: 3rem;
   }
 }
 
 @media only screen and (max-width: 650px) {
+  p {
+    font-size: 1.6rem;
+  }
+  
   #snake-control button {
     font-size: 1.5rem;
     width: 60px;
@@ -169,10 +173,6 @@ p {
     font-size: 1.8rem;
   }
   
-  p {
-    font-size: 1.6rem;
-  }
-
   #score {
     width: 90px;
     height: 90px;
@@ -181,5 +181,4 @@ p {
   #vertical {
     margin: auto 10px;
   }
-
 }

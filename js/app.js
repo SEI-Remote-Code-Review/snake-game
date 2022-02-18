@@ -43,7 +43,7 @@ function init() {
   direction = 'right';
   score = 0;
   winner = 1;
-  speed = 800;
+  speed = 1000;
   restartButton.setAttribute('hidden', true);
   playButton.textContent = 'PLAY';
   board.classList.remove('animate__shakeY');
@@ -158,7 +158,7 @@ function addMove(newCell) {
     snakeEats.play();
     foodGenerator();
     score += 10;
-    speed -= 5;
+    speed -= 10;
   } else {
     snakeMoves.play();
     snake.shift();
@@ -184,7 +184,6 @@ function handleTurnKeys(evt) {
   move();
   }
 }
-
 
 function boardGenerator(columns, rows) {
   board.style.gridTemplateRows = `repeat(${rows},4vmin)`;
