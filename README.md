@@ -14,13 +14,13 @@ Try the game now: <https://illia-br.github.io/snake-game/>
 
 ## Screenshots
 
-##### Game now
-
-![Snake game screenshot](./assets/gamescreenshot.png)
-
 ##### Game's wireframe
 
 ![Snake game wireframe](./assets/snakeWireframe.png)
+
+##### Game now
+
+![Snake game screenshot](./assets/gamescreenshot.png)
 
 ## Technologies used
 
