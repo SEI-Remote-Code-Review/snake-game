@@ -10,7 +10,7 @@ Try the game now: <https://illia-br.github.io/snake-game/>
 
 ## Screenshots
 
-![Snake game screenshot](./assets/Screenshot.png)
+![Snake game screenshot](./assets/gamescreenshot.png)
 
 ![Snake game wireframe](./assets/snakeWireframe.png)
 
