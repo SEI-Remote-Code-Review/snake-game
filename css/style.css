@@ -136,12 +136,12 @@ p {
 }
 
 #restart {
-  margin-bottom: 2%;
   background-color: #86C6F4;
 }
 
 #play {
   background-color:  #FF865E;
+  margin-bottom: 2%;
 }
 
 @media only screen and (max-width: 900px) {

@@ -12,6 +12,8 @@ Try the game now: <https://illia-br.github.io/snake-game/>
 
 ![Snake game screenshot](./assets/Screenshot.png)
 
+![Snake game wireframe](./assets/snakeWireframe.png)
+
 ## Technologies used
 
 + HTML
