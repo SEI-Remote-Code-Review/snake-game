@@ -191,6 +191,7 @@ function boardGenerator(columns, rows) {
   for (let i = 0; i < (columns*rows); i++) {
     let cell = document.createElement('div');
     cell.setAttribute('class', 'board-cell');
+    cell.setAttribute('id', `cell${i}`);
     board.appendChild(cell);
   }
   return document.querySelectorAll('.board-cell');
